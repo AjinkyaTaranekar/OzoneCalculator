@@ -12,7 +12,7 @@ String strInput = "";
 final textControllerInput = TextEditingController();
 final textControllerResult = TextEditingController();
 bool eval = false;
-double _panelHeightOpen = 200.0;
+double _panelHeightOpen = 220.0;
 double _panelHeightClosed = 20.0;
 bool isEmpty = true;
 bool hasoperator = false;
@@ -299,6 +299,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget advPanel() {
     return Column(
       children: <Widget>[
+        SizedBox(
+          height: 20,
+        ),
         Row(
           children: <Widget>[
             advanced('INV'),
