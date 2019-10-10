@@ -205,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: FlatButton(
         child: Text(
           btntext,
-          style: TextStyle(fontSize: 40),
+          style: TextStyle(fontSize: 35, fontWeight: FontWeight.w300),
         ),
         onPressed: () {
           setState(() {
@@ -244,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
       height: (0.11) * MediaQuery.of(context).size.height,
       width: (0.22) * MediaQuery.of(context).size.width,
       child: FlatButton(
-        child: Icon(Icons.backspace, size: 35, color: Colors.red),
+        child: Icon(Icons.backspace, size: 30, color: Colors.red),
         onPressed: () {
           textControllerInput.text = (textControllerInput.text.length > 0)
               ? (textControllerInput.text
