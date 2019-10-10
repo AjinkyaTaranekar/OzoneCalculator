@@ -49,6 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 parallaxOffset: .5,
                 panel: advPanel(),
                 color: Color(0xff5283f6),
+                backdropEnabled: false,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    blurRadius: 0.0,
+                    color: Color.fromRGBO(0, 0, 0, 0),
+                  )
+                ],
               )
             ],
           ),
