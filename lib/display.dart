@@ -14,11 +14,10 @@ class Display extends StatefulWidget {
 class _DisplayState extends State<Display> {
   Widget build(BuildContext context) {
     return Container(
-      height: (0.5) * MediaQuery.of(context).size.height,
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: (0.15) * MediaQuery.of(context).size.height,
+            height: (0.63) * MediaQuery.of(context).size.height,
           ),
           Container(
             height: (0.20) * MediaQuery.of(context).size.height,
@@ -39,7 +38,7 @@ class _DisplayState extends State<Display> {
             ),
           ),
           Container(
-              height: (0.05) * MediaQuery.of(context).size.height,
+              height: (0.1) * MediaQuery.of(context).size.height,
               child: TextField(
                 decoration: new InputDecoration.collapsed(
                     hintText: "",
