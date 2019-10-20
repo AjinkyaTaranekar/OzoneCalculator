@@ -16,6 +16,7 @@ double _panelHeightOpen = 220.0;
 double _panelHeightClosed = 20.0;
 bool isEmpty = true;
 bool hasoperator = false;
+bool isAdvVisible = true;
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -36,164 +37,196 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        children: <Widget>[
-          Stack(
-            alignment: Alignment.bottomCenter,
-            children: <Widget>[
-              Display(input: textControllerInput, result: textControllerResult),
-              SlidingUpPanel(
-                maxHeight: _panelHeightOpen,
-                minHeight: _panelHeightClosed,
-                parallaxEnabled: true,
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+              bottom: 0,
+              child: Container(
+                height: (0.5) * MediaQuery.of(context).size.height,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      width: (0.8) * MediaQuery.of(context).size.width,
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 8,
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                width: 10,
+                              ),
+                              numpad('7'),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              numpad('8'),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              numpad('9')
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 10,
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                width: 10,
+                              ),
+                              numpad('4'),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              numpad('5'),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              numpad('6'),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 10,
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                width: 10,
+                              ),
+                              numpad('1'),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              numpad('2'),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              numpad('3'),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 10,
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                width: 10,
+                              ),
+                              numpad('.'),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              numpad('0'),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              eval == true ? clear('C') : backspace()
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: (0.20) * MediaQuery.of(context).size.width,
+                      color: Color(0xfff2f4ff),
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 20,
+                          ),
+                          operator('/'),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          operator('*'),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          operator('-'),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          operator('+'),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          evaluate('=')
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ), SlidingUpPanel(
+                panel: Display(
+                    input: textControllerInput, result: textControllerResult, arrowDirection: isAdvVisible,),
+                minHeight: (0.5) * MediaQuery.of(context).size.height,
+                maxHeight: MediaQuery.of(context).size.height,
+                backdropEnabled: true,
                 parallaxOffset: .5,
-                panel: advPanel(),
-                color: Color(0xff5283f6),
-                backdropEnabled: false,
+                slideDirection: SlideDirection.DOWN,
                 boxShadow: <BoxShadow>[
                   BoxShadow(
                     blurRadius: 0.0,
                     color: Color.fromRGBO(0, 0, 0, 0),
                   )
                 ],
-              )
-            ],
-          ),
-          Container(
-            height: (0.5) * MediaQuery.of(context).size.height,
-            child: Row(
-              children: <Widget>[
-                Container(
-                  width: (0.8) * MediaQuery.of(context).size.width,
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 8,
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 10,
-                          ),
-                          numpad('7'),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          numpad('8'),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          numpad('9')
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 10,
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 10,
-                          ),
-                          numpad('4'),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          numpad('5'),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          numpad('6'),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 10,
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 10,
-                          ),
-                          numpad('1'),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          numpad('2'),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          numpad('3'),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 10,
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 10,
-                          ),
-                          numpad('.'),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          numpad('0'),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          eval == true ? clear('C') : backspace()
-                        ],
-                      ),
+                onPanelOpened: (){
+                  setState(() {
+                   isAdvVisible = false; 
+                  });
+                },
+                onPanelClosed: (){
+                  setState(() {
+                   isAdvVisible = true; 
+                  });
+                },
+              ),
+            isAdvVisible ? Positioned(
+                top: (0.5) * MediaQuery.of(context).size.height -
+                    _panelHeightOpen,
+                child: Container(
+                  height: _panelHeightOpen,
+                  width: MediaQuery.of(context).size.width,
+                  child: SlidingUpPanel(
+                    maxHeight: _panelHeightOpen,
+                    minHeight: _panelHeightClosed,
+                    parallaxEnabled: true,
+                    parallaxOffset: .5,
+                    panel: advPanel(),
+                    color: Color(0xff5283f6),
+                    backdropEnabled: false,
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        blurRadius: 0.0,
+                        color: Color.fromRGBO(0, 0, 0, 0),
+                      )
                     ],
                   ),
-                ),
-                Container(
-                  width: (0.20) * MediaQuery.of(context).size.width,
-                  color: Color(0xfff2f4ff),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 20,
-                      ),
-                      operator('/'),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      operator('*'),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      operator('-'),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      operator('+'),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      evaluate('=')
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
+                )) : Container()
+          ],
+        ),
       ),
     );
   }
