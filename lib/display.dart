@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class Display extends StatefulWidget {
   final input;
   final result;
-  Display({@required this.input, this.result});
+  final arrowDirection;
+  Display({@required this.input, this.result, this.arrowDirection});
 
   @override
   _DisplayState createState() => _DisplayState();
@@ -53,6 +54,12 @@ class _DisplayState extends State<Display> {
                   FocusScope.of(context).requestFocus(new FocusNode());
                 },
               )),
+          Container(
+            height: (0.05) * MediaQuery.of(context).size.height,
+            child: Icon(
+              widget.arrowDirection ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up
+            ),
+          ),
         ],
       ),
     );
