@@ -34,7 +34,7 @@ class _DisplayState extends State<Display> {
               ),
               textAlign: TextAlign.right,
               controller: widget.input,
-              onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
+              focusNode: AlwaysDisabledFocusNode(),
             ),
           ),
           Container(
@@ -49,9 +49,7 @@ class _DisplayState extends State<Display> {
                     fontSize: 32, fontFamily: 'RobotoMono', color: Colors.grey),
                 textAlign: TextAlign.right,
                 controller: widget.result,
-                onTap: () {
-                  FocusScope.of(context).requestFocus(new FocusNode());
-                },
+                focusNode: AlwaysDisabledFocusNode(),
               )),
           Container(
             height: (0.05) * MediaQuery.of(context).size.height,
@@ -63,4 +61,8 @@ class _DisplayState extends State<Display> {
       ),
     );
   }
+}
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
 }
