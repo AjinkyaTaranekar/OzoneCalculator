@@ -11,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 String strInput = "";
 final textControllerInput = TextEditingController();
 final textControllerResult = TextEditingController();
+final textControllerDisplay = TextEditingController();
 bool eval = false;
 double _panelHeightOpen = 220.0;
 double _panelHeightClosed = 20.0;
@@ -24,12 +25,14 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     textControllerInput.addListener(() {});
     textControllerResult.addListener(() {});
+    textControllerDisplay.addListener(() {});
   }
 
   @override
   void dispose() {
     textControllerInput.dispose();
     textControllerResult.dispose();
+    textControllerDisplay.dispose();
     super.dispose();
   }
 
@@ -180,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ), SlidingUpPanel(
                 panel: Display(
-                    input: textControllerInput, result: textControllerResult, arrowDirection: isAdvVisible,),
+                    input: textControllerDisplay, result: textControllerResult, arrowDirection: isAdvVisible,),
                 minHeight: (0.5) * MediaQuery.of(context).size.height,
                 maxHeight: MediaQuery.of(context).size.height,
                 backdropEnabled: true,
@@ -242,6 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         onPressed: () {
           setState(() {
+            textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + btntext;
           });
           result(textControllerInput.text);
@@ -264,6 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         onPressed: () {
           setState(() {
+            textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + btntext;
             hasoperator = true;
           });
@@ -302,6 +307,7 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             textControllerInput.text = "";
             textControllerResult.text = "";
+            textControllerDisplay.text = "";
             eval = false;
           });
         },
@@ -326,7 +332,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ContextModel cm = new ContextModel();
           Expression exp = p.parse(textControllerInput.text);
           setState(() {
-            textControllerInput.text =
+            textControllerDisplay.text =
                 exp.evaluate(EvaluationType.REAL, cm).toString();
             textControllerResult.text = ' ';
             eval = true;
@@ -385,6 +391,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         onPressed: () {
           setState(() {
+            textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + btntext;
             hasoperator = true;
           });
