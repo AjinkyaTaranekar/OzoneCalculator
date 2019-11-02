@@ -372,7 +372,7 @@ class _HomeScreenState extends State<HomeScreen> {
             advanced('e'),
             advanced('('),
             advanced(')'),
-            advanced('√')
+            sqrt('√')
           ],
         )
       ],
@@ -393,6 +393,27 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + btntext;
+            hasoperator = true;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget sqrt(btntext) {
+    return Container(
+      height: (0.08) * MediaQuery.of(context).size.height,
+      width: (0.20) * MediaQuery.of(context).size.width,
+      child: FlatButton(
+        child: Text(
+          btntext,
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400),
+        ),
+        onPressed: () {
+          setState(() {
+            textControllerDisplay.text = textControllerDisplay.text + btntext;
+            textControllerInput.text = textControllerInput.text + "sqrt";
             hasoperator = true;
           });
         },
