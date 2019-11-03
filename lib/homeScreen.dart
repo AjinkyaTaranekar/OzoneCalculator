@@ -366,7 +366,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Row(
           children: <Widget>[
             advanced('π'),
-            advanced('e'),
+            exp('e'),
             advanced('('),
             advanced(')'),
             sqrt('√')
@@ -432,6 +432,28 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + "10log";
+            hasoperator = true;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget exp(btntext) {
+    return Container(
+      height: (0.08) * MediaQuery.of(context).size.height,
+      width: (0.20) * MediaQuery.of(context).size.width,
+      child: FlatButton(
+        child: Text(
+          btntext,
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400),
+        ),
+        onPressed: () {
+          setState(() {
+            textControllerDisplay.text = textControllerDisplay.text + btntext;
+            textControllerInput.text = textControllerInput.text + "e";
+            result("e1");
             hasoperator = true;
           });
         },
