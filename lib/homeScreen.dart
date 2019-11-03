@@ -453,8 +453,8 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + "e";
-            result("e1");
             hasoperator = true;
+            result("e1");
           });
         },
       ),
