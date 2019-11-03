@@ -158,11 +158,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 20,
                           ),
-                          operator('/'),
+                          divide('÷'),
                           SizedBox(
                             height: 10,
                           ),
-                          operator('*'),
+                          multiply('×'),
                           SizedBox(
                             height: 10,
                           ),
@@ -270,6 +270,50 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + btntext;
+            hasoperator = true;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget multiply(btntext) {
+    return Container(
+      height: (0.08) * MediaQuery.of(context).size.height,
+      child: FlatButton(
+        child: Text(
+          btntext,
+          style: TextStyle(
+              color: Color(0xff5486fb),
+              fontSize: 40,
+              fontWeight: FontWeight.w400),
+        ),
+        onPressed: () {
+          setState(() {
+            textControllerDisplay.text = textControllerDisplay.text + btntext;
+            textControllerInput.text = textControllerInput.text + "*";
+            hasoperator = true;
+          });
+        },
+      ),
+    );
+  }
+
+    Widget divide(btntext) {
+    return Container(
+      height: (0.08) * MediaQuery.of(context).size.height,
+      child: FlatButton(
+        child: Text(
+          btntext,
+          style: TextStyle(
+              color: Color(0xff5486fb),
+              fontSize: 40,
+              fontWeight: FontWeight.w400),
+        ),
+        onPressed: () {
+          setState(() {
+            textControllerDisplay.text = textControllerDisplay.text + btntext;
+            textControllerInput.text = textControllerInput.text + "/";
             hasoperator = true;
           });
         },
@@ -462,6 +506,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   result(input) {
+    print(hasoperator);
     if (hasoperator) {
       Parser p = new Parser();
       ContextModel cm = new ContextModel();
