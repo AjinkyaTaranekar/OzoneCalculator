@@ -328,14 +328,11 @@ class _HomeScreenState extends State<HomeScreen> {
               fontWeight: FontWeight.w400),
         ),
         onPressed: () {
-          Parser p = new Parser();
-          ContextModel cm = new ContextModel();
-          Expression exp = p.parse(textControllerInput.text);
           setState(() {
-            textControllerDisplay.text =
-                exp.evaluate(EvaluationType.REAL, cm).toString();
+            textControllerDisplay.text = textControllerResult.text;
             textControllerResult.text = ' ';
             eval = true;
+            hasoperator = false;
           });
         },
       ),
