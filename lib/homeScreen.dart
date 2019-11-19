@@ -17,9 +17,9 @@ double _panelHeightOpen = 220.0;
 double _panelHeightClosed = 20.0;
 bool isEmpty = true;
 bool hasoperator = false;
-bool isAdvVisible = true;
 var whatOperator = new List<String>();
 int operatorIndex = 0;
+double displayPosition;
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -201,18 +201,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Color.fromRGBO(0, 0, 0, 0),
                 )
               ],
-              onPanelOpened: () {
+              onPanelSlide: (double pos) {
                 setState(() {
-                  isAdvVisible = false;
-                });
-              },
-              onPanelClosed: () {
-                setState(() {
-                  isAdvVisible = true;
+                  displayPosition = pos;
                 });
               },
             ),
-            isAdvVisible
+            displayPosition == 0.0
                 ? Positioned(
                     top: (0.55) * MediaQuery.of(context).size.height -
                         _panelHeightOpen,
