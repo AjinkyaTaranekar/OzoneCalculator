@@ -19,7 +19,7 @@ bool isEmpty = true;
 bool hasoperator = false;
 var whatOperator = new List<String>();
 int operatorIndex = 0;
-double displayPosition;
+double displayPosition = 0.0;
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -188,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
               panel: Display(
                 input: textControllerDisplay,
                 result: textControllerResult,
-                arrowDirection: isAdvVisible,
+                arrowDirection: displayPosition > 0.0 ? false : true,
               ),
               minHeight: (0.55) * MediaQuery.of(context).size.height,
               maxHeight: MediaQuery.of(context).size.height,
