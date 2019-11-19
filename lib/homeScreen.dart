@@ -18,6 +18,8 @@ double _panelHeightClosed = 20.0;
 bool isEmpty = true;
 bool hasoperator = false;
 bool isAdvVisible = true;
+var whatOperator = new List<String>();
+int operatorIndex = 0;
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -284,6 +286,8 @@ class _HomeScreenState extends State<HomeScreen> {
             textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + btntext;
             hasoperator = true;
+            whatOperator.add(btntext);
+            operatorIndex++;
           });
         },
       ),
@@ -306,6 +310,8 @@ class _HomeScreenState extends State<HomeScreen> {
             textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + btntext;
             hasoperator = true;
+            whatOperator.add(btntext);
+            operatorIndex++;
           });
         },
       ),
@@ -328,6 +334,8 @@ class _HomeScreenState extends State<HomeScreen> {
             textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + "*";
             hasoperator = true;
+            whatOperator.add(btntext);
+            operatorIndex++;
           });
         },
       ),
@@ -350,6 +358,8 @@ class _HomeScreenState extends State<HomeScreen> {
             textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + "/";
             hasoperator = true;
+            whatOperator.add(btntext);
+            operatorIndex++;
           });
         },
       ),
@@ -362,13 +372,29 @@ class _HomeScreenState extends State<HomeScreen> {
       width: (0.22) * MediaQuery.of(context).size.width,
       child: FlatButton(
         child: Icon(Icons.backspace, size: 30, color: Colors.red),
-        onPressed: () {
-          textControllerInput.text = (textControllerInput.text.length > 0)
-              ? (textControllerInput.text
-                  .substring(0, textControllerInput.text.length - 1))
-              : "";
-        },
         color: Colors.white,
+        onPressed: () {
+          setState(() {
+            textControllerDisplay.text = (textControllerDisplay.text
+                .substring(0, textControllerDisplay.text.length - 1));
+            textControllerInput.text = (textControllerInput.text
+                .substring(0, textControllerInput.text.length - 1));
+          });
+            if (textControllerDisplay.text
+                    .split(whatOperator[operatorIndex - 1])[1]
+                    .length ==
+                0) {
+              result(textControllerInput.text
+                  .substring(0, textControllerInput.text.length - 1));
+              operatorIndex--;
+            } else {
+              result(textControllerInput.text);
+            }
+          if (textControllerDisplay.text.split(whatOperator[0])[1].length ==
+              0) {
+            textControllerResult.text = '';
+          }
+        },
       ),
     );
   }
@@ -410,8 +436,10 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             textControllerDisplay.text = textControllerResult.text;
             textControllerResult.text = ' ';
+            textControllerInput.text = ' ';
             eval = true;
             hasoperator = false;
+            operatorIndex = 0;
           });
         },
       ),
