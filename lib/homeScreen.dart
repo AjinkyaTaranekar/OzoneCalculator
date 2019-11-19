@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Positioned(
               bottom: 0,
               child: Container(
-                height: (0.5) * MediaQuery.of(context).size.height,
+                height: (0.45) * MediaQuery.of(context).size.height,
                 child: Row(
                   children: <Widget>[
                     Container(
@@ -166,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 10,
                           ),
-                          operator('-'),
+                          subtract('-'),
                           SizedBox(
                             height: 10,
                           ),
@@ -181,53 +181,59 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-            ), SlidingUpPanel(
-                panel: Display(
-                    input: textControllerDisplay, result: textControllerResult, arrowDirection: isAdvVisible,),
-                minHeight: (0.5) * MediaQuery.of(context).size.height,
-                maxHeight: MediaQuery.of(context).size.height,
-                backdropEnabled: true,
-                parallaxOffset: .5,
-                slideDirection: SlideDirection.DOWN,
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    blurRadius: 0.0,
-                    color: Color.fromRGBO(0, 0, 0, 0),
-                  )
-                ],
-                onPanelOpened: (){
-                  setState(() {
-                   isAdvVisible = false; 
-                  });
-                },
-                onPanelClosed: (){
-                  setState(() {
-                   isAdvVisible = true; 
-                  });
-                },
+            ),
+            SlidingUpPanel(
+              panel: Display(
+                input: textControllerDisplay,
+                result: textControllerResult,
+                arrowDirection: isAdvVisible,
               ),
-            isAdvVisible ? Positioned(
-                top: (0.5) * MediaQuery.of(context).size.height -
-                    _panelHeightOpen,
-                child: Container(
-                  height: _panelHeightOpen,
-                  width: MediaQuery.of(context).size.width,
-                  child: SlidingUpPanel(
-                    maxHeight: _panelHeightOpen,
-                    minHeight: _panelHeightClosed,
-                    parallaxEnabled: true,
-                    parallaxOffset: .5,
-                    panel: advPanel(),
-                    color: Color(0xff5283f6),
-                    backdropEnabled: false,
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        blurRadius: 0.0,
-                        color: Color.fromRGBO(0, 0, 0, 0),
-                      )
-                    ],
-                  ),
-                )) : Container()
+              minHeight: (0.55) * MediaQuery.of(context).size.height,
+              maxHeight: MediaQuery.of(context).size.height,
+              backdropEnabled: true,
+              parallaxOffset: .5,
+              slideDirection: SlideDirection.DOWN,
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  blurRadius: 0.0,
+                  color: Color.fromRGBO(0, 0, 0, 0),
+                )
+              ],
+              onPanelOpened: () {
+                setState(() {
+                  isAdvVisible = false;
+                });
+              },
+              onPanelClosed: () {
+                setState(() {
+                  isAdvVisible = true;
+                });
+              },
+            ),
+            isAdvVisible
+                ? Positioned(
+                    top: (0.55) * MediaQuery.of(context).size.height -
+                        _panelHeightOpen,
+                    child: Container(
+                      height: _panelHeightOpen,
+                      width: MediaQuery.of(context).size.width,
+                      child: SlidingUpPanel(
+                        maxHeight: _panelHeightOpen,
+                        minHeight: _panelHeightClosed,
+                        parallaxEnabled: true,
+                        parallaxOffset: .5,
+                        panel: advPanel(),
+                        color: Color(0xff5283f6),
+                        backdropEnabled: false,
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            blurRadius: 0.0,
+                            color: Color.fromRGBO(0, 0, 0, 0),
+                          )
+                        ],
+                      ),
+                    ))
+                : Container()
           ],
         ),
       ),
@@ -236,14 +242,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget numpad(btntext) {
     return Container(
-      height: (0.11) * MediaQuery.of(context).size.height,
+      height: (0.09) * MediaQuery.of(context).size.height,
       width: (0.22) * MediaQuery.of(context).size.width,
       child: FlatButton(
         child: Text(
           btntext,
-          style: TextStyle(fontSize: 35, fontWeight: FontWeight.w300),
+          style: TextStyle(
+              fontSize: 35,
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF121212)),
         ),
         onPressed: () {
+          if (eval == true) {
+            textControllerDisplay.text = '';
+            eval = false;
+          }
           setState(() {
             textControllerDisplay.text = textControllerDisplay.text + btntext;
             textControllerInput.text = textControllerInput.text + btntext;
@@ -257,13 +270,35 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget operator(btntext) {
     return Container(
-      height: (0.08) * MediaQuery.of(context).size.height,
+      height: (0.07) * MediaQuery.of(context).size.height,
       child: FlatButton(
         child: Text(
           btntext,
           style: TextStyle(
               color: Color(0xff5486fb),
-              fontSize: 40,
+              fontSize: 35,
+              fontWeight: FontWeight.w400),
+        ),
+        onPressed: () {
+          setState(() {
+            textControllerDisplay.text = textControllerDisplay.text + btntext;
+            textControllerInput.text = textControllerInput.text + btntext;
+            hasoperator = true;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget subtract(btntext) {
+    return Container(
+      height: (0.07) * MediaQuery.of(context).size.height,
+      child: FlatButton(
+        child: Text(
+          btntext,
+          style: TextStyle(
+              color: Color(0xff5486fb),
+              fontSize: 60,
               fontWeight: FontWeight.w400),
         ),
         onPressed: () {
@@ -279,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget multiply(btntext) {
     return Container(
-      height: (0.08) * MediaQuery.of(context).size.height,
+      height: (0.07) * MediaQuery.of(context).size.height,
       child: FlatButton(
         child: Text(
           btntext,
@@ -299,9 +334,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-    Widget divide(btntext) {
+  Widget divide(btntext) {
     return Container(
-      height: (0.08) * MediaQuery.of(context).size.height,
+      height: (0.07) * MediaQuery.of(context).size.height,
       child: FlatButton(
         child: Text(
           btntext,
