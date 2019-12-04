@@ -41,4 +41,4 @@ These instructions will get you a copy of the project up and running on your loc
 Licensed under the Apache License, Version 2.0
 
 ## Contributing
-Feel free to join our telegram group and discuss what's in your mind, we can work together to build a better app.
+Feel free to join our [telegram group](https://t.me/joinchat/IgDgDxRNassU3epD2LJWzw) and discuss what's in your mind, we can work together to build a better app.
